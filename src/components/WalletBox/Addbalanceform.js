@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddBalance.css"
 
-function AddBalance({ handleAddExpense, toggleForm }) {
+function AddBalance({ handleAddBalance, toggleForm }) {
     const[balanceformdata ,setbalanceformdata] =useState({
         income:""
     })
@@ -13,7 +13,7 @@ function AddBalance({ handleAddExpense, toggleForm }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleAddExpense(balanceformdata);
+        handleAddBalance(balanceformdata);
         // Reset form
         setbalanceformdata({
             income: ""});

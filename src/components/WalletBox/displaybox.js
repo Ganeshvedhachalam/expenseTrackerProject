@@ -4,7 +4,7 @@ import { useState } from "react";
 import AddBalance from "./Addbalanceform";
 
 
-function Displaybox( {amount,handleAddExpense}) {
+function Displaybox( {amount,handleAddBalance}) {
   const [showForm, setShowForm] = useState(false);
   
 
@@ -49,7 +49,7 @@ function Displaybox( {amount,handleAddExpense}) {
      {showForm && (
                 <div style={{display:"flex",width:"800px",height:"600px", justifyContent:"center",backgroundColor:"yellow",
                  alignItems:"center"}}>
-                     <AddBalance handleAddExpense={handleAddExpense} toggleForm={toggleForm}/></div>
+                     <AddBalance handleAddBalance ={handleAddBalance} toggleForm={toggleForm}/></div>
                
             )}
 

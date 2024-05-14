@@ -1,6 +1,6 @@
 
 import logo from "../assets/Group 42.png"
-import InnnerView from "./innerview";
+import InnerView from "./innerview";
 
 function Overview() {
     return (
@@ -10,7 +10,7 @@ function Overview() {
             <img style={{width:"150px" ,height:"40px",padding:"10px", margin:"10px 0px 5px 20px"}} src={logo} alt="logo"/>
        </div>
 
-       <InnnerView/>
+       <InnerView/>
        
 
         </div>

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import AddExpense from "./ExpenseBox/AddexpenseForm";
 import "./innerview.css"
 
-function InnnerView(){
+function InnerView(){
 
         const [balance, setBalance] = useState(() => {
         const storedBalance = localStorage.getItem("balance");
@@ -36,6 +36,9 @@ function InnnerView(){
 
 
     const handleDelete = (index) => {
+        const deletedExpense = expenses[index]
+        const deletedAmount= parseFloat(deletedExpense.price);
+        setBalance((prevBalance)=>prevBalance+deletedAmount)
         // Create a copy of expenses array
         const updatedExpenses = [...expenses];
         // Remove the transaction at the given index
@@ -43,25 +46,38 @@ function InnnerView(){
         // Update the state with the updated expenses array
         setExpenses(updatedExpenses);
     };
-
     const handleEdit = (editedTransaction, index) => {
-        setEditedTransactionIndex(index);
-        setEditedTransaction(editedTransaction);
-    };
-
+        // const oldExpense = expenses[index];
+        // const oldAmount = parseFloat(oldExpense.price);
+        // console.log(`old amount: ${oldAmount}`);
     
+        setEditedTransactionIndex(index);
+        setEditedTransaction({ ...editedTransaction, price: parseFloat(editedTransaction.price) });
+        console.log(` our edited transaction :${editedTransaction}`)
+    };
+    
+
     const handleSaveChanges = (updatedTransaction) => {
+        // Calculate the difference between the old and new expense amounts
+        const oldExpense = expenses[editedTransactionIndex];
+        const oldAmount = parseFloat(oldExpense.price);
+        const newAmount = parseFloat(updatedTransaction.price);
+        const amountDifference = newAmount - oldAmount;
+    
+        // Update the expenses array with the edited transaction
         const updatedExpenses = expenses.map((expense, index) =>
             index === editedTransactionIndex ? updatedTransaction : expense
         );
         setExpenses(updatedExpenses);
-        setEditedTransaction(null); // Reset edited transaction state
-        setEditedTransactionIndex(null); // Reset edited transaction index
-        console.log(`updated transaction : ${updatedTransaction}`)
-        console.log( `updated expenses :${updatedExpenses}`)
-        console.log("saved chnages")
-        
+    
+        // Update the balance with the difference in amounts
+        setBalance(prevBalance => prevBalance - amountDifference);
+    
+        // Reset edited transaction state
+        setEditedTransaction(null);
+        setEditedTransactionIndex(null);
     };
+    
 
     const handleAddbalance=(balanceAmount)=>{
         setBalance(prevBalance => prevBalance + parseFloat(balanceAmount.income));
@@ -122,7 +138,7 @@ function InnnerView(){
                 <div  className=" uppersection" style={{display:"flex" ,backgroundColor:" #626262 ", width:"95%" ,
                 height:"40%", margin:"0px 30px 20px 30px" ,justifyContent:"space-evenly" ,alignItems:"center"}} >
                     
-               < Displaybox amount={balance} handleAddExpense={handleAddbalance}/>
+               < Displaybox amount={balance} handleAddBalance={handleAddbalance}/>
                <ExpenseDisplaybox amount={expenses.reduce((total, expense) => total + parseFloat(expense.price), 0)}
                 handleAddExpense={handleAddExpense} expenses={expenses}/>
                {/* < Displaybox name={"Piechart"} amount={"5000"} buttonname={"+ Add expenses"}/> */}
@@ -139,16 +155,14 @@ function InnnerView(){
             <div style={{display:"flex",width:"800px",height:"600px", justifyContent:"center",backgroundColor:"yellow",
                  alignItems:"center"}}>
 
-                      <AddExpense
-                                formData={editedTransaction}
-                                handleAddExpense={handleSaveChanges}
-                                toggleForm={() => setEditedTransaction(null)}
-                                categories={categories}
-                                editedTransactionIndex={editedTransactionIndex}
-                                editedTransaction={editedTransaction}
-                            />
-                    
-
+<AddExpense  formData={editedTransaction}
+    handleAddExpense={handleSaveChanges}
+    toggleForm={() => setEditedTransaction(null)}
+    categories={categories}
+    editedTransactionIndex={editedTransactionIndex}
+    editedTransaction={editedTransaction}
+/>
+   
              </div>
 
             // <AddExpense formData={editedTransaction} handleAddExpense={handleSaveChanges} toggleForm={() => setEditedTransaction(null)} categories={categories} />
@@ -166,4 +180,4 @@ function InnnerView(){
        )
 
 }
-export default InnnerView
+export default InnerView
