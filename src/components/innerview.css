@@ -1,0 +1,30 @@
+/* InnerView.css */
+
+/* Styles for large screens */
+.innerview-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-color:blue
+}
+
+/* Media query for medium-sized screens */
+@media screen and (max-width: 768px) {
+    .innerview-container {
+        /* Adjust styles for medium screens */
+        background-color:blueviolet;
+        padding:"30px"
+    }
+    
+}
+
+/* Media query for small-sized screens */
+@media screen and (max-width: 480px) {
+    .innerview-container {
+        /* Adjust styles for small screens */
+        background-color:aqua;
+        padding:"20px";
+    }
+}

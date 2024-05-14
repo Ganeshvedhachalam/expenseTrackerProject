@@ -1,0 +1,31 @@
+.BalanceForm { 
+    background-color:#FFFFFF;
+    width: 700px;
+    height: 450px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: calc(80% - 20px); /* Adjust width based on your requirement */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-actions button {
+    margin: 20px;
+    width: 200PX;
+    padding: 10px;
+}
